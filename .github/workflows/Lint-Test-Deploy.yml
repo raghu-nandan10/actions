@@ -12,6 +12,7 @@ jobs:
           node-version: 18
       - name: Lint
         run: |
+          npm i
           npm lint
           echo "Lint success!"
   Test:
@@ -26,6 +27,7 @@ jobs:
           node-version: 18
       - name: Test
         run: |
+          npm i
           npm test
           echo "Text success!"
   Deploy:
@@ -40,5 +42,6 @@ jobs:
           node-version: 18
       - name: Test
         run: |
+          npm i
           npm run build
           echo "Build success!"
