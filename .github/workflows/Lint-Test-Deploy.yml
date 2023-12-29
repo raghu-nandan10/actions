@@ -1,0 +1,44 @@
+name: Lint-Test-Deploy
+on: push
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repo code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Lint
+        run: |
+          npm lint
+          echo "Lint success!"
+  Test:
+    runs-on: ubuntu-latest
+    needs: Lint
+    steps:
+      - name: Get repo code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Test
+        run: |
+          npm test
+          echo "Text success!"
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: Test
+    steps:
+      - name: Get Repo code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Test
+        run: |
+          npm run build
+          echo "Build success!"
